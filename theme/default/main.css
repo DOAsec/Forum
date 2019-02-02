@@ -1,0 +1,294 @@
+/*
+CSS Font Stack Code
+*/
+h1 { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; }
+h2 { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 19px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 20.9px; }
+h3 { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; }
+input, textarea, select, p, body { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; }
+blockquote { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; }
+pre { font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5667px; }
+
+
+html {
+	min-height: 100%;
+}
+body {
+	background: #191919;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+.page {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	background: #FFF;
+}
+.header, .footer {
+	background: #191919;
+	padding: 10px;
+	color: #FFF;
+}
+.body {
+	color: #FCFCFC !important;
+	padding: 15px;
+}
+
+
+/*
+Header
+*/
+.header {
+	border-bottom: 3px solid #892222;
+	min-height: 100px;
+}
+.header a {
+	color: #FFF;
+	transition: 1.2s;
+	text-decoration: none;
+}
+.header a:hover {
+	color: #892222;
+}
+.headtext {
+	width:  48%;
+	float: left;
+}
+.headnav {
+	width: 48%;
+	float: right;
+	text-align: right;
+}
+
+
+/*
+Footer
+*/
+.footer {
+	border-top: 3px solid #892222;
+}
+.linkgrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px;
+}
+.footsection a {
+	color: #FFF;
+	text-decoration: none;
+	transition: .8s;
+	white-space:pre;
+}
+.footsection a:after {
+	content: "\A";
+}
+.footsection a:hover {
+	color: #892222;
+}
+.footsection h4 {
+	margin: 15px 0px;
+}
+
+
+/*
+Forms
+*/
+.loginsection, .registersection {
+	filter: blur(3px);
+	transition: 1s;
+	opacity: 0.7;
+	width: 20%;
+	min-width: 400px;
+}
+.loginsection:hover, .registersection:hover {
+	filter: unset;
+	opacity: 1;
+}
+.registersection {
+	width: 30%;
+}
+.labeltd {
+	width: 60%;
+	text-align: right;
+}
+.inputtd {
+	text-align: left;
+}
+.inputtd input {
+	width: 50%;
+	min-width: 300px;
+}
+
+
+/*
+User Page
+*/
+.usergrid {
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+
+/*
+Forum Stuff
+*/
+.forumsection {
+	margin: 10px;
+	padding: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.noticetext {
+	font-weight: 700;
+	color: #000;
+}
+.catnav {
+	padding: 5px 10px;
+}
+.catnav a {
+	color: #892222;
+	text-decoration: none;
+	transition: .4s;
+	font-weight: 700;
+}
+.catnav a:hover {
+	color: #000;
+}
+table {
+	width: 100%;
+	margin: 0px;
+	background: #111;
+	background: linear-gradient(90deg, #111 65%, #151515);
+	border: 2px solid #111;
+}
+table a {
+	color: #FFF;
+	transition: .4s;
+	text-decoration: none;
+}
+table a:hover {
+	color: #892222;
+}
+tbody td, .fhead .fdesc {
+	background: rgba(0, 0, 0, 0);
+	padding: 4px;
+	border-top: 2px solid #191919;
+}
+.fhead .fdesc, tbody tr:first-child td {
+	background: #101010;
+	border-radius: 0px !important;
+}
+.fhead tr:first-child td {
+	transition: 1s;
+}
+.fhead tr:first-child td:hover {
+	color: #892222;
+	transition-timing-function: ease-in-out;
+	transition: 7s;
+	transition-duration: 5s;
+	filter: blur(2px);
+}
+.fhead td {
+	background: #892222;
+	padding: 3px;
+}
+table td, table thead {
+	padding: 4px 8px !important;
+}
+input, select, textarea {
+	background: #333;
+	border-radius: 5px;
+	padding: 7px;
+	border: 1px solid #222;
+	min-width: 100px;
+	transition: .4s;
+	margin: 3px;
+}
+input[type="submit"]:hover {
+	background: #444;
+}
+input:active, input:focus {
+	border: 1px solid #892222;
+}
+.forum {
+	width: 60%;
+}
+.thumb {
+	padding: 5px;
+}
+.thumb img {
+	max-width: 45px;
+	max-height: 45px;
+	vertical-align: middle;
+}
+.tdcenter {
+	text-align: center;
+}
+.avatar, .sm_avatar {
+	max-width: 160px;
+	max-height: 160px;
+	border-radius: 3px;
+	margin: 5px;
+	border: 1px solid #010101;
+}
+.sm_avatar {
+	max-width: 80px;
+	max-height: 80px;
+}
+.usera {
+	color: #892222;
+}
+.usera:hover {
+	text-decoration: line-through;
+	color: #FFF;
+}
+.userinfo .img, .userinfo .data {
+	display: inline-block;
+}
+.data {
+	padding: 10px;
+	position: relative;
+	top: -20px;
+}
+.posttop, .postbody {
+	padding: 5px;
+	display: inline-block;
+	width: calc(100% - 10px);
+}
+.posttop {
+	height: 15px;
+	color: #C0C0C0;
+}
+.postbody {
+	min-height: 120px;
+}
+
+
+/*
+@media (max-width: 1000px) {
+	.page {
+		width: 95%;
+	}
+}
+*/
+
+@media (max-width: 480px) {
+	* {
+		font-size: 96%;
+	}
+	.page {
+		all: unset;
+		width: 100%;
+		margin: 0px;
+	}
+	.forumsection, .body {
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		
+	}
+	.loginsection, .registersection {
+		filter: unset;
+		opacity: 1;
+	}
+}
