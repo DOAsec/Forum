@@ -92,6 +92,8 @@ foreach ($db->query("SELECT * FROM threads WHERE categoryid = ".$categoryid." AN
 						}
 
 						echo '<a href="?user='.$user["id"].'"  class="usera"><span style="color: '.htmlspecialchars($rank["color"]).';">'.htmlspecialchars($user["username"]).'</span></a> posted at '.date(DATE_RFC2822, $lastpost["timestamp"]);
+					} else {
+						echo 'No posts.';
 					}
 				}
 				?>

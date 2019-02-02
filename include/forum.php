@@ -52,8 +52,14 @@ if ($action === "forum") {
 		include($includedir."threadtable.php");
 
 		if ($threadi == 0) {
-			echo "No threads found.<br>\r\n";
+			?>
+			<div class="noticetext">
+				No threads found.
+			</div>
+			<?php
 		}
+	} else {
+
 	}
 }
 

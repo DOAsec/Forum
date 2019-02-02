@@ -59,6 +59,9 @@ Header
 	float: right;
 	text-align: right;
 }
+.navlinks a {
+	padding: 10px;
+}
 
 
 /*
@@ -154,7 +157,7 @@ Forum Stuff
 .catnav a:hover {
 	color: #000;
 }
-table {
+table, .usergrid {
 	width: 100%;
 	margin: 0px;
 	background: #111;
@@ -174,7 +177,7 @@ tbody td, .fhead .fdesc {
 	padding: 4px;
 	border-top: 2px solid #191919;
 }
-.fhead .fdesc, tbody tr:first-child td {
+.fhead .fdesc, tbody tr:first-child td, .usercolumn {
 	background: #101010;
 	border-radius: 0px !important;
 }
@@ -188,9 +191,10 @@ tbody td, .fhead .fdesc {
 	transition-duration: 5s;
 	filter: blur(2px);
 }
-.fhead td {
+.fhead td, .usercolumn h4 {
 	background: #892222;
 	padding: 3px;
+	margin: 0px;
 }
 table td, table thead {
 	padding: 4px 8px !important;
@@ -225,8 +229,8 @@ input:active, input:focus {
 	text-align: center;
 }
 .avatar, .sm_avatar {
-	max-width: 160px;
-	max-height: 160px;
+	max-width: 140px;
+	max-height: 140px;
 	border-radius: 3px;
 	margin: 5px;
 	/*border: 1px solid #010101;*/

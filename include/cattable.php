@@ -135,6 +135,8 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
 
 									echo '<a href="?user='.$user["id"].'" class="usera"><span style="color: '.htmlspecialchars($rank["color"]).';">'.htmlspecialchars($user["username"]).'</span></a> posted'.$in.' the thread "<a href="?thread='.$lastthread["safesubject"].'">'.$lastthread["subject"].'</a>" at '.date(DATE_RFC2822, $lastpost["timestamp"]);
 									
+								} else {
+									echo 'No posts.';
 								}
 								?>
 							</td>
