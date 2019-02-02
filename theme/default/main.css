@@ -229,7 +229,7 @@ input:active, input:focus {
 	max-height: 160px;
 	border-radius: 3px;
 	margin: 5px;
-	border: 1px solid #010101;
+	/*border: 1px solid #010101;*/
 }
 .sm_avatar {
 	max-width: 80px;
