@@ -90,6 +90,12 @@ if (isset($_SESSION["userform_password"])) {
 			if ($_SESSION["token"]["userdata"]) {
 				//print_r($_SESSION["token"]["userdata"]);
 
+				// Query rank if not cached
+				$rankcache[$_SESSION["token"]["userdata"]["rankid"]] = $_SESSION["token"]["userrank"] = queryById("ranks", $rankcache, $_SESSION["token"]["userdata"]["rankid"]);
+
+				// Query group if not cached
+				$groupcache[$_SESSION["token"]["userdata"]["groupid"]] = $_SESSION["token"]["usergroup"] = queryById("groups", $groupcache, $_SESSION["token"]["userdata"]["groupid"]);
+
 				// Set to valid token
 				$_SESSION["token"]["safetycheck"] = createToken();
 

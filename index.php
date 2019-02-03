@@ -8,6 +8,7 @@ $groupcache = array();
 include_once("config.php");
 
 include_once("dbfunctions.php");
+include_once("displayfunctions.php");
 
 include_once("auth.php");
 

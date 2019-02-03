@@ -89,11 +89,10 @@ if (isset($_GET["thread"])) {
 				<?php
 					$page = 1;
 					$offset = 1;
-					$threadsperpage = 5;
 					$postnum = 0;
 					if (isset($_GET["page"])) {
 						if (is_numeric($_GET["page"]) && $_GET["page"] > 0) {
-							$offset = $_GET["page"] * $threadsperpage;
+							$offset = ($_GET["page"] * $settings_threadsperpage) - 1;
 							$page = $_GET["page"];
 						} else {
 							die($numbersonlyerror);
@@ -107,7 +106,7 @@ if (isset($_GET["thread"])) {
 
 					$firstpost = false;
 
-					foreach ($db->query("SELECT * FROM posts WHERE threadid = ".$thread["id"]." ORDER BY timestamp ASC LIMIT ".$threadsperpage." OFFSET ".$offset.";") as $post) {
+					foreach ($db->query("SELECT * FROM posts WHERE threadid = ".$thread["id"]." ORDER BY timestamp ASC LIMIT ".$settings_threadsperpage." OFFSET ".$offset.";") as $post) {
 						$postnum++;
 
 

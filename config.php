@@ -16,7 +16,7 @@ $defaultavatar = "defaulticon.png";
 $includedir = "include/";
 $dbfailfile = "nodb.php";
 
-
+$settings_threadsperpage = 6;
 $settings_navurls = array("Back to Portfolio" => "../");
 $settings_minpwlen = 6;
 $settings_invitecodes = 5;

@@ -29,11 +29,7 @@ if (!$user_loggedin) {
 				<?php echo '<span style="color: '.htmlspecialchars($group["color"]).';">'.htmlspecialchars($group["name"]).'</span> <span style="color: '.htmlspecialchars($rank["color"]).';">'.htmlspecialchars($rank["name"]).'</span>'; ?>
 			</div>
 			<?php
-			if ($user["avatar"] != "") {
-				echo '<img class="sm_avatar" src="'.$avatardir.$user["avatar"].'" />';
-			} else {
-				echo '<img class="sm_avatar" src="'.$avatardir.$defaultavatar.'" />';
-			}
+			echo avatar_sm($user);
 		}
 		?>
 	</div>
