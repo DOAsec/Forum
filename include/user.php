@@ -172,7 +172,16 @@
 			<div class="usercolumn bio">
 				<h4><b>Bio</b></h4>
 				<div class="infobox">
-
+					<form method="post">
+						<textarea name="bio" <?php if ($_SESSION["token"]["userrank"]["isadmin"] < 1 && $user["id"] !== $userdata["id"]) { echo "disabled"; } ?>></textarea>
+						<?php
+						if ($_SESSION["token"]["userrank"]["isadmin"] > 0 || $user["id"] == $userdata["id"]) {
+							?>
+							<input type="submit" name="change_bio" value="Change" />
+							<?php
+						}
+						?>
+					</form>
 				</div>
 			</div>
 
@@ -182,7 +191,7 @@
 			<div class="usercolumn reputation">
 				<h4><b>Reputation</b></h4>
 				<div class="infobox">
-
+					Reputation system not yet implemented.
 				</div>
 			</div>
 			
@@ -278,10 +287,10 @@
 
 					foreach ($posts as $post) {
 						//print_r($post);
-						echo "<br><br>";
+						//echo "<br><br>";
 						$thread = queryById("threads", $threadcache, $post["threadid"]);
 						$postpage = calcPostPage(queryCountLt("posts", "threadid", $post["threadid"], "timestamp", $post["timestamp"]));
-						echo $postpage;
+						//echo $postpage;
 						?>
 						<tr>
 							<td>

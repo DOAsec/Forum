@@ -120,9 +120,7 @@ Forms
 	width: 50%;
 	min-width: 300px;
 }
-.infobox input:disabled {
-	color: #FCFCFC !important;
-}
+
 
 
 /*
@@ -140,8 +138,18 @@ User Page
 .infobox input, .infobox select, .infobox textarea {
 	background: rgba(0, 0, 0, 0);
 	padding: 0px;
-	margin: 0px;
+	margin: 5px;
 	border: none;
+}
+.infobox input:disabled {
+	color: #FCFCFC !important;
+	margin: 0px;
+}
+.infobox textarea {
+	width: calc(100% - 10px) !important;
+	margin: 5px;
+	min-height: 150px;
+	border: 1px solid #FCFCFC !important;
 }
 .infobox input[type="submit"] {
 	background: #892222;
