@@ -1,23 +1,23 @@
 <?php
 function avatar_sm($user) {
-	global $avatardir;
-	global $defaultavatar;
+	global $settings_avatardir;
+	global $settings_defaultavatar;
 
 	if ($user["avatar"] != "") {
-		return '<img class="sm_avatar" src="'.$avatardir.$user["avatar"].'" />';
+		return '<img class="sm_avatar" src="'.$settings_avatardir.$user["avatar"].'" />';
 	} else {
-		return '<img class="sm_avatar" src="'.$avatardir.$defaultavatar.'" />';
+		return '<img class="sm_avatar" src="'.$settings_avatardir.$settings_defaultavatar.'" />';
 	}
 }
 
 function avatar($user) {
-	global $avatardir;
-	global $defaultavatar;
+	global $settings_avatardir;
+	global $settings_defaultavatar;
 
 	if ($user["avatar"] != "") {
-		return '<img class="avatar" src="'.$avatardir.$user["avatar"].'" />';
+		return '<img class="avatar" src="'.$settings_avatardir.$user["avatar"].'" />';
 	} else {
-		return '<img class="avatar" src="'.$avatardir.$defaultavatar.'" />';
+		return '<img class="avatar" src="'.$settings_avatardir.$settings_defaultavatar.'" />';
 	}
 }
 

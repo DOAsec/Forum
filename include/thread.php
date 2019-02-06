@@ -51,8 +51,6 @@ if (isset($_GET["thread"])) {
 		}
 	}
 
-	//print_r($thread);
-
 	$curcat = queryById("categories", array(), $thread["categoryid"]);
 	$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a>';
 	while ($curcat["parent"] != 0) {
@@ -101,7 +99,7 @@ if (isset($_GET["thread"])) {
 
 					if ($page == 1) {
 						$firstpost = true;
-						include($includedir."posttable.php");
+						include($config_defaultavatar."posttable.php");
 					}
 
 					$firstpost = false;
@@ -121,7 +119,7 @@ if (isset($_GET["thread"])) {
 						$groupcache[$user["groupid"]] = $group = queryById("groups", $groupcache, $user["groupid"]);
 						
 
-						include($includedir."posttable.php");
+						include($config_defaultavatar."posttable.php");
 					}
 				?>
 			</tbody>

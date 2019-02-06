@@ -1,4 +1,5 @@
 				<?php
+				// Add html ID if not first post
 				if ($firstpost) {
 					echo '<tr id="'.htmlspecialchars($thread["safesubject"]).'">';
 				} else {
@@ -7,11 +8,8 @@
 				?>
 					<td class="tdcenter">
 						<?php
-						if ($user["avatar"] != "") {
-							echo '<img class="avatar" src="'.$avatardir.$user["avatar"].'" />';
-						} else {
-							echo '<img class="avatar" src="'.$avatardir.$defaultavatar.'" />';
-						}
+						// Display avatar/user info
+						echo avatar($user);
 						?>
 						<br>
 						<?php echo '<a href="?user='.$user["id"].'" class="usera"><span style="color: '.htmlspecialchars($rank["color"]).';">'.htmlspecialchars($user["username"]).'</span></a>'; ?>
@@ -25,10 +23,11 @@
 							<span style="float: left;"><?php echo htmlspecialchars($thread["subject"]).' &nbsp; <a href="#'.htmlspecialchars($thread["safesubject"]).$post["id"].'">Post #'.$postnum.'</a>'; ?></span>
 							<span style="float: right;">
 							<?php
+							// Display edit time
 							if (($p_timestamp != $p_edittimestamp) && $p_edittimestamp != 0) {
-							?>
-							<b>Edited</b>: 
-							<?php
+								?>
+								<b>Edited</b>: 
+								<?php
 								echo date(DATE_RFC2822, $p_edittimestamp);
 							}
 							?>
@@ -47,6 +46,7 @@
 						</div>
 						<div class="postbody">
 							<?php
+							// echo post content
 							if ($firstpost) {
 								echo htmlspecialchars($thread["body"]);
 							} else {

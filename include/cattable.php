@@ -15,8 +15,6 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
 		
 		
 		foreach ($db->query($catquery) as $category) {
-			//print_r($category);
-			//echo "\r\n<br>\r\n<br>";
 
 			$curcat = queryById("categories", array(), $category["id"]);
 			$catstring = "";

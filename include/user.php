@@ -222,12 +222,6 @@
 					<?php
 					$threads = queryLatestOrderByXWhere("threads", "timestamp", "accountid", $userdata["id"]);
 
-					/*
-					echo "<pre>";
-					print_r($threads);
-					echo "</pre>";
-					*/
-
 					$catcache = array();
 
 					foreach ($threads as $thread) {
@@ -276,21 +270,13 @@
 					<?php
 					$posts = queryLatestOrderByXWhere("posts", "timestamp", "accountid", $userdata["id"]);
 
-					/*
-					echo "<pre>";
-					print_r($threads);
-					echo "</pre>";
-					*/
-
 					$catcache = array();
 					$threadcache = array();
 
 					foreach ($posts as $post) {
-						//print_r($post);
-						//echo "<br><br>";
 						$thread = queryById("threads", $threadcache, $post["threadid"]);
 						$postpage = calcPostPage(queryCountLt("posts", "threadid", $post["threadid"], "timestamp", $post["timestamp"]));
-						//echo $postpage;
+
 						?>
 						<tr>
 							<td>

@@ -6,22 +6,21 @@ $site_name = "Forum";
 $site_tagline = "This is only a simulation.";
 $site_description = "";
 $site_footer = "&copy; ".date("Y")." ".$site_name.". All your base are belong to us.";
-$theme_name = "default";
-
 
 $REMOTE_ADDR = $_SERVER["REMOTE_ADDR"];
 
-$avatardir = "files/avatars/";
-$defaultavatar = "defaulticon.png";
-$includedir = "include/";
-$dbfailfile = "nodb.php";
+$config_defaultavatar = "include/";
+$config_dbfailfile = "nodb.php";
 
+$settings_themename = "default";
+$settings_avatardir = "files/avatars/";
+$settings_defaultavatar = "defaulticon.png";
 $settings_threadsperpage = 6;
 $settings_navurls = array("Back to Portfolio" => "../");
 $settings_minpwlen = 6;
 $settings_invitecodes = 5;
-$require_invites = true;
-$inviteonly_pages = array($includedir."register.php", $includedir."login.php");
+$settings_requireinvites = true;
+$settings_inviteonlywhitelist = array($config_defaultavatar."register.php", $config_defaultavatar."login.php");
 
 
 // Strings to show as easter egss
@@ -52,9 +51,9 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
 	try {
 	    @$db = new PDO($details, $db_user, $db_pass);
 	} catch(PDOException $error) {
-		include_once($includedir."header.php");
-	    include_once($includedir.$dbfailfile);
-	    include_once($includedir."footer.php");
+		include_once($config_defaultavatar."header.php");
+	    include_once($config_defaultavatar.$config_dbfailfile);
+	    include_once($config_defaultavatar."footer.php");
 	    die();
 	}
 }

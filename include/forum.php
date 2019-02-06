@@ -18,7 +18,7 @@ if (isset($_GET["cat"])) {
 
 if ($action === "forum") {
 	$parent = 0;
-	include_once($includedir."cattable.php");
+	include_once($config_defaultavatar."cattable.php");
 } else if ($action === "badcategory") {
 	echo "Category does not exist.";
 } else if ($action === "category") {
@@ -31,7 +31,7 @@ if ($action === "forum") {
 	// Used by cattable.php
 	$parent = $category["id"];
 	$catdisplay = $category["parent"];
-	include_once($includedir."cattable.php");
+	include_once($config_defaultavatar."cattable.php");
 
 
 	// Show threads
@@ -45,11 +45,11 @@ if ($action === "forum") {
 
 		// Show stickied threads
 		$stickied = 1;
-		include($includedir."threadtable.php");
+		include($config_defaultavatar."threadtable.php");
 
 		// Show normal threads
 		$stickied = 0;
-		include($includedir."threadtable.php");
+		include($config_defaultavatar."threadtable.php");
 
 		if ($threadi == 0) {
 			?>

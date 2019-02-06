@@ -50,7 +50,7 @@
 					</td>
 				</tr>
 				<?php
-				if ($require_invites) {
+				if ($settings_requireinvites) {
 				?>
 				<tr>
 					<td class="labeltd">
@@ -76,7 +76,7 @@
 				if (isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["v_password"])) {
 					if ($_POST["email"] == "" && $_POST["username"] == "" && $_POST["password"] == "" && $_POST["v_password"] == "") {
 						$register_error = "Please fill out the form to register.";
-					} else if ($require_invites && !isset($_POST["invitecode"])) {
+					} else if ($settings_requireinvites && !isset($_POST["invitecode"])) {
 						$register_error = "You must have an invite code.";
 					} else {
 
