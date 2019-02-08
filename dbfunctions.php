@@ -52,6 +52,17 @@ function queryLatestOrderByXWhere($table, $x, $what, $where, $limit = 10) {
 	return $result;
 }
 
+function queryCount($table, $x, $id) {
+	global $db;
+
+	$qs = "SELECT count(*) FROM `".$table."` WHERE ".$x." = ?;";
+	$q = $db->prepare($qs);
+	$q->execute(array($id));
+	$result = $q->fetch();
+	
+	return $result[0];
+}
+
 function queryCountLt($table, $x, $id, $what, $where) {
 	global $db;
 

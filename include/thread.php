@@ -51,6 +51,7 @@ if (isset($_GET["thread"])) {
 		}
 	}
 
+	// Set up category navigation
 	$curcat = queryById("categories", array(), $thread["categoryid"]);
 	$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a>';
 	while ($curcat["parent"] != 0) {
@@ -58,9 +59,31 @@ if (isset($_GET["thread"])) {
 		$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a> > '.$catstring;
 	}
 	$catstring = '<a href="?">Home</a> > '.$catstring;
+
+
+	// Set up current page info
+	$page = 1;
+	$offset = 0;
+	$postnum = 0;
+	if (isset($_GET["page"])) {
+		if (is_numeric($_GET["page"]) && $_GET["page"] > 0) {
+			$page = $_GET["page"];
+			$offset = (($page - 1) * $settings_threadsperpage);
+			
+		} else {
+			die($numbersonlyerror);
+		}
+	}
 	?>
 	<div class="catnav">
-		<?php echo $catstring; ?>
+		<?php
+			echo '<div>'.$catstring.'</div>
+			<div>'; 
+			for ($pagei = 1; $pagei < (((queryCount("posts", "threadid", $thread["id"]) + 1) / $settings_threadsperpage) + 1); $pagei++) {
+				echo threadLink($thread, $pagei, $pagei);
+			}
+			echo '</div>';
+		?>
 	</div>
 	
 	<div class="forumsection">
@@ -85,18 +108,6 @@ if (isset($_GET["thread"])) {
 			</thead>
 			<tbody>
 				<?php
-					$page = 1;
-					$offset = 0;
-					$postnum = 0;
-					if (isset($_GET["page"])) {
-						if (is_numeric($_GET["page"]) && $_GET["page"] > 0) {
-							$page = $_GET["page"];
-							$offset = (($page - 1) * $settings_threadsperpage);
-							
-						} else {
-							die($numbersonlyerror);
-						}
-					}
 
 					if ($page == 0) {
 						$firstpost = true;
