@@ -86,25 +86,26 @@ if (isset($_GET["thread"])) {
 			<tbody>
 				<?php
 					$page = 1;
-					$offset = 1;
+					$offset = 0;
 					$postnum = 0;
 					if (isset($_GET["page"])) {
 						if (is_numeric($_GET["page"]) && $_GET["page"] > 0) {
-							$offset = ($_GET["page"] * $settings_threadsperpage) - 1;
 							$page = $_GET["page"];
+							$offset = (($page - 1) * $settings_threadsperpage);
+							
 						} else {
 							die($numbersonlyerror);
 						}
 					}
 
-					if ($page == 1) {
+					if ($page == 0) {
 						$firstpost = true;
 						include($config_defaultavatar."posttable.php");
 					}
 
 					$firstpost = false;
 
-					foreach ($db->query("SELECT * FROM posts WHERE threadid = ".$thread["id"]." ORDER BY timestamp ASC LIMIT ".$settings_threadsperpage." OFFSET ".$offset.";") as $post) {
+					foreach ($db->query("SELECT * FROM posts WHERE threadid = ".$thread["id"]." ORDER BY id ASC LIMIT ".$settings_threadsperpage." OFFSET ".$offset.";") as $post) {
 						$postnum++;
 
 

@@ -56,9 +56,9 @@ function latestPosts($id = 0, $limit = 10) {
 		<?php
 	} else {
 		if ($id == 0) {
-			$posts = queryLatestOrderByXWhere("posts", "timestamp", "approved", 1, $limit);
+			$posts = queryLatestOrderByXWhere("posts", "id", "approved", 1, $limit);
 		} else {
-			$posts = queryLatestOrderByXWhere("posts", "timestamp", "accountid", $id, $limit);
+			$posts = queryLatestOrderByXWhere("posts", "id", "accountid", $id, $limit);
 		}
 
 		$catcache = array();
@@ -66,7 +66,7 @@ function latestPosts($id = 0, $limit = 10) {
 
 		foreach ($posts as $post) {
 			$thread = queryById("threads", $threadcache, $post["threadid"]);
-			$postpage = calcPostPage(queryCountLt("posts", "threadid", $post["threadid"], "timestamp", $post["timestamp"]));
+			$postpage = calcPostPage(queryCountLt("posts", "threadid", $post["threadid"], "id", $post["id"]) + 1);
 
 			?>
 			<tr>

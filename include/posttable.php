@@ -20,7 +20,7 @@
 					</td>
 					<td>
 						<div class="posttop">
-							<span style="float: left;"><?php echo htmlspecialchars($thread["subject"]).' &nbsp; <a href="#'.htmlspecialchars($thread["safesubject"]).$post["id"].'">Post #'.$postnum.'</a>'; ?></span>
+							<span style="float: left;"><?php echo htmlspecialchars($thread["subject"]).' &nbsp; <a href="#'.htmlspecialchars($thread["safesubject"]).$post["id"].'">Post #'.($postnum + ($settings_threadsperpage * ($page - 1))).'</a>'; ?></span>
 							<span style="float: right;">
 							<?php
 							// Display edit time
