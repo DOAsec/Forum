@@ -201,98 +201,17 @@
 			<div class="usercolumn threads">
 				<h4>Threads</h4>
 				<div class="infobox">
-					<table>
-						<tr>
-							<td>
-								<b>Category</b>
-							</td>
-							<td>
-								<b>Thread</b>
-							</td>
-							<td>
-								<b>Posted</b>
-							</td>
-							<td>
-								<b>Views</b>
-							</td>
-							<td>
-								<b>Replies</b>
-							</td>
-						</tr>
-					<?php
-					$threads = queryLatestOrderByXWhere("threads", "timestamp", "accountid", $userdata["id"]);
+					
+					<?php echo lastestThreads($userdata["id"], 15); ?>
 
-					$catcache = array();
-
-					foreach ($threads as $thread) {
-						?>
-						<tr>
-							<td>
-								<?php
-								$category = queryById("categories", $catcache, $thread["categoryid"]);
-								echo '<a href="?cat='.htmlspecialchars($category["safename"]).'">'.htmlspecialchars($category["name"]).'</a>';
-								?>
-							</td>
-							<td>
-								<?php echo '<a href="?thread='.$thread["safesubject"].'">'.htmlspecialchars($thread["subject"]).'</a>'; ?>
-							</td>
-							<td>
-								<?php echo date(DATE_RFC2822, $thread["timestamp"]); ?>
-							</td>
-							<td>
-								<?php echo $thread["viewscache"]; ?>
-							</td>
-							<td>
-								<?php echo $thread["repliescache"]; ?>
-							</td>
-						</tr>
-						<?php
-					}
-					?>
-					</table>
 				</div>
 			</div>
 			<div class="usercolumn posts">
 				<h4>Posts</h4>
 				<div class="infobox">
-					<table>
-						<tr>
-							<td>
-								<b>Thread</b>
-							</td>
-							<td>
-								<b>Posted</b>
-							</td>
-							<td>
-								<b>Text</b>
-							</td>
-						</tr>
-					<?php
-					$posts = queryLatestOrderByXWhere("posts", "timestamp", "accountid", $userdata["id"]);
+						
+					<?php echo latestPosts($userdata["id"], 25); ?>
 
-					$catcache = array();
-					$threadcache = array();
-
-					foreach ($posts as $post) {
-						$thread = queryById("threads", $threadcache, $post["threadid"]);
-						$postpage = calcPostPage(queryCountLt("posts", "threadid", $post["threadid"], "timestamp", $post["timestamp"]));
-
-						?>
-						<tr>
-							<td>
-								<?php echo '<a href="?thread='.$thread["safesubject"].'&page='.$postpage.'#'.$thread["safesubject"].$post["id"].'">'.htmlspecialchars($thread["subject"]).'</a>'; ?>
-							</td>
-							<td>
-								<?php echo date(DATE_RFC2822, $post["timestamp"]); ?>
-							</td>
-							<td>
-								<?php echo substr($post["body"], 0, 32); if (strlen($post["body"]) > 32) { echo "..."; } ?>
-							</td>
-						</tr>
-						<?php
-					}
-					?>
-					</table>
 				</div>
 			</div>
 		</div>

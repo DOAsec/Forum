@@ -20,11 +20,17 @@
 					}
 					?>
 				</div>
-				<div class="footsection">
+				<div class="footsection threads">
 					<h4>Latest Threads</h4>
+
+					<?php echo lastestThreads($userdata["id"], 5); ?>
+
 				</div>
-				<div class="footsection">
+				<div class="footsection posts">
 					<h4>Latest Posts</h4>
+
+					<?php echo latestPosts($user["userid"], 5); ?>
+
 				</div>
 			</div>
 			<br>

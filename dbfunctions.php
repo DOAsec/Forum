@@ -41,10 +41,10 @@ function queryLatestOrderByX($table, $x) {
 	return $result;
 }
 
-function queryLatestOrderByXWhere($table, $x, $what, $where) {
+function queryLatestOrderByXWhere($table, $x, $what, $where, $limit = 10) {
 	global $db;
 
-	$qs = "SELECT * FROM `".$table."` WHERE ".$what." = ? ORDER BY ".$x." DESC;";
+	$qs = "SELECT * FROM `".$table."` WHERE ".$what." = ? ORDER BY ".$x." DESC LIMIT ".$limit.";";
 	$q = $db->prepare($qs);
 	$q->execute(array($where));
 	$result = $q->fetchAll();

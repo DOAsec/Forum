@@ -35,8 +35,6 @@ if (isset($_SESSION["token"]["safetycheck"])) {
 		if ($_SESSION["token"]["userdata"]) {
 			$user_loggedin = true;
 		}
-	} else {
-		echo "nologin";
 	}
 } else {
 	$_SESSION["token"]["safetycheck"] = createToken();

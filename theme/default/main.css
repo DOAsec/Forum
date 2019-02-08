@@ -64,33 +64,6 @@ Header
 }
 
 
-/*
-Footer
-*/
-.footer {
-	border-top: 3px solid #892222;
-}
-.linkgrid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 10px;
-}
-.footsection a {
-	color: #FFF;
-	text-decoration: none;
-	transition: .8s;
-	white-space:pre;
-}
-.footsection a:after {
-	content: "\A";
-}
-.footsection a:hover {
-	color: #892222;
-}
-.footsection h4 {
-	margin: 15px 0px;
-}
-
 
 /*
 Forms
@@ -313,6 +286,49 @@ input:active, input:focus {
 }
 .postbody {
 	min-height: 120px;
+}
+
+
+/*
+Footer
+*/
+.footer {
+	border-top: 3px solid #892222;
+}
+.linkgrid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 15px;
+}
+
+.linkgrid .posts {
+	grid-column: 4 / 6;
+	grid-row: 1;
+}
+.linkgrid .threads {
+	grid-column: 2 / 4;
+	grid-row: 1;
+}
+
+.footsection a {
+	color: #FFF;
+	text-decoration: none;
+	transition: .8s;
+	white-space:pre;
+}
+.footsection a:after {
+	content: "\A";
+}
+.footsection a:hover {
+	color: #892222;
+}
+.footsection h4 {
+	margin: 15px 0px;
+}
+.footer table, .footer table td, .footer table tr:first-child td {
+	background: unset;
+	padding: 0px !important;
+	border: none;
 }
 
 
