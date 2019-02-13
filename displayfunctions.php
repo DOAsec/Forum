@@ -157,12 +157,12 @@ function lastestThreads($id = 0, $limit = 10) {
 	<?php
 }
 
-function threadLink($thread, $text = "", $page = 1) {
+function threadLink($thread, $text = "", $page = 1, $cpage = false) {
 	if ($text == "") {
 		$text = $thread["subject"];
 	}
 	$class = ' class="pagination"';
-	if ($text == $page) {
+	if ($cpage && $cpage == $page) {
 		$class = ' class="pagination cpage"';
 	}
 	return '<a'.$class.' href="?thread='.$thread["safesubject"].'&page='.$page.'">'.htmlspecialchars($text).'</a>';

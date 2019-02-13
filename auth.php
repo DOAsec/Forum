@@ -98,7 +98,7 @@ if (isset($_SESSION["userform_password"])) {
 				$_SESSION["token"]["safetycheck"] = createToken();
 
 				$user_loggedin = true;
-				header("Location: ?");
+				header("Refresh:3");
 			} else {
 				$loginmessage = "Login credentials invalid.            ";
 			}
