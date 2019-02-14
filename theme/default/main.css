@@ -50,7 +50,7 @@ Forum Stuff
 	font-weight: 700;
 	color: #000;
 }
-.catnav {
+.catnav div {
 	padding: 5px 10px;
 }
 .catnav a {
@@ -58,6 +58,7 @@ Forum Stuff
 	text-decoration: none;
 	transition: .4s;
 	font-weight: 700;
+	padding: 3px;
 }
 .catnav a:hover {
 	color: #000;
@@ -179,6 +180,9 @@ input:active, input:focus {
 }
 .cpage {
 	color: #000 !important;
+}
+.cpage:hover {
+	color: #892222 !important;
 }
 
 

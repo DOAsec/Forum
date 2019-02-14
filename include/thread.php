@@ -14,11 +14,9 @@ Page selection works, but there are no links and the code is not aware of the to
 
 
 // Query for the thread
-
 $thread = queryByX("threads", $threadcache, $_GET["thread"], "safesubject");
 
-print_r($thread);
-
+// Check to see if thread was found
 if ($thread) {
 	// Query user if not cached
 	if (isset($usercache[$thread["accountid"]])) {
@@ -49,12 +47,12 @@ if ($thread) {
 
 	// Set up category navigation
 	$curcat = queryById("categories", array(), $thread["categoryid"]);
-	$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a>';
+	$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'" class="cpage">'.htmlspecialchars($curcat["name"]).'</a>';
 	while ($curcat["parent"] != 0) {
 		$curcat = queryById("categories", array(), $curcat["parent"]);
-		$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a> > '.$catstring;
+		$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a> '.$catstring;
 	}
-	$catstring = '<a href="?">Home</a> > '.$catstring;
+	$catstring = '<a href="?">Home</a> '.$catstring;
 
 
 	// Set up current page info
@@ -70,31 +68,33 @@ if ($thread) {
 			die($numbersonlyerror);
 		}
 	}
+
+	// Get page count for pagination
+	$pagecount = ceil((queryCount("posts", "threadid", $thread["id"]) + 1) / $settings_threadsperpage);
+
+	// Set up page navigation
+	$paginationstring = "";
+	if ($page > 1) {
+		$paginationstring .= " ".threadLink($thread, "<< ", 1, $page);
+	}
+	if ($page > 2) {
+		$paginationstring .= " ".threadLink($thread, "< ", $page - 1, $page);
+	}
+	for ($pagei = 1; $pagei < ($pagecount + 1); $pagei++) {
+		$paginationstring .= threadLink($thread, $pagei, $pagei, $page);
+	}
+	if ($page < $pagecount - 1) {
+		$paginationstring .= " ".threadLink($thread, ">", $page + 1, $page);
+	}
+	if ($page < $pagecount) {
+		$paginationstring .= " ".threadLink($thread, ">>", $pagecount, $page);
+	}
 	?>
 	<div class="catnav">
 		<?php
-			$pagecount = ceil((queryCount("posts", "threadid", $thread["id"]) + 1) / $settings_threadsperpage);
-
 			echo '
 			<div>'.$catstring.'</div>
-			<div>';
-			if ($page > 1) {
-				echo " ".threadLink($thread, "<< ", 1, $page);
-			}
-			if ($page > 2) {
-				echo " ".threadLink($thread, "< ", $page - 1, $page);
-			}
-			for ($pagei = 1; $pagei < ($pagecount + 1); $pagei++) {
-				echo threadLink($thread, $pagei, $pagei, $page);
-			}
-			if ($page < $pagecount - 1) {
-				echo " ".threadLink($thread, ">", $page + 1, $page);
-			}
-			if ($page < $pagecount) {
-				echo " ".threadLink($thread, ">>", $pagecount, $page);
-			}
-			echo '
-			</div>';
+			<div>'.$paginationstring.'</div>';
 		?>
 	</div>
 
@@ -147,6 +147,14 @@ if ($thread) {
 		</table>
 	</div>
 
+	<div class="catnav">
+		<?php
+			echo '
+			<div>'.$paginationstring.'</div>
+			<div>'.$catstring.'</div>';
+		?>
+	</div>
+
 	<div class="forumsection">
 		<form method="POST">
 			<table class="createpost">
@@ -183,6 +191,9 @@ if ($thread) {
 			</table>
 		</form>
 	</div>
+
+
+
 	<?php
 	} else {
 		?>
