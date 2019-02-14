@@ -78,15 +78,17 @@ function db_getUID($username) {
 	global $db;
 
 	// I can only hope I remember to write this
-	$registration = $db->prepare("SELECT count(*) FROM `accounts` WHERE username = ?;");
-	$registration->execute(array($username));
-	return $registration->fetchColumn();
+	$q = $db->prepare("SELECT count(*) FROM `accounts` WHERE username = ?;");
+	$q->execute(array($username));
+	return $q->fetchColumn();
 }
 
 function db_registerUser($email, $username, $passwordhash, $avatar, $rankid, $groupid, $ip, $invitecodes) {
+	global $db;
+
 	$qs = "INSERT INTO `accounts` (`refid`, `email`, `username`, `password`, `avatar`, `rankid`, `groupid`, `isbanned`, `postcount`, `regip`, `regtime`, `invitecodes`)
-VALUES ('0', ?, ?, ?, ?, ?, ?, '0', '0', ?, now(), ?);";
+VALUES ('0', ?, ?, ?, ?, ?, ?, 0, 0, ?, now(), ?);";
 	$q = $db->prepare($qs);
-	$q->execute(array($id));
+	$q->execute(array($email, $username, $passwordhash, $avatar, $rankid, $groupid, $ip, $invitecodes));
 }
 ?>

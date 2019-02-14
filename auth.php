@@ -9,6 +9,8 @@ $user_loggedin = false;
 
 // Token that will be set if the session is valid to prevent cookie hijacking
 function createToken() {
+	global $REMOTE_ADDR;
+	
 	$tokenua = $tokencs = $tokenlang = $tokenuname = "";
 	if (isset($_SERVER['HTTP_USER_AGENT'])) {
 		$tokenua = $_SERVER['HTTP_USER_AGENT'];
@@ -89,10 +91,10 @@ if (isset($_SESSION["userform_password"])) {
 				//print_r($_SESSION["token"]["userdata"]);
 
 				// Query rank if not cached
-				$rankcache[$_SESSION["token"]["userdata"]["rankid"]] = $_SESSION["token"]["userrank"] = queryById("ranks", $rankcache, $_SESSION["token"]["userdata"]["rankid"]);
+				$rankcache[$_SESSION["token"]["userdata"]["rankid"]] = $_SESSION["token"]["userrank"] = db_queryById("ranks", $rankcache, $_SESSION["token"]["userdata"]["rankid"]);
 
 				// Query group if not cached
-				$groupcache[$_SESSION["token"]["userdata"]["groupid"]] = $_SESSION["token"]["usergroup"] = queryById("groups", $groupcache, $_SESSION["token"]["userdata"]["groupid"]);
+				$groupcache[$_SESSION["token"]["userdata"]["groupid"]] = $_SESSION["token"]["usergroup"] = db_queryById("groups", $groupcache, $_SESSION["token"]["userdata"]["groupid"]);
 
 				// Set to valid token
 				$_SESSION["token"]["safetycheck"] = createToken();

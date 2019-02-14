@@ -73,44 +73,30 @@
 				// Process user registration
 
 				$register_error = "";
-				if (isset($_POST["email"]) && isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["v_password"])) {
-					if ($_POST["email"] == "" && $_POST["username"] == "" && $_POST["password"] == "" && $_POST["v_password"] == "") {
-						$register_error = "Please fill out the form to register.";
-					} else if ($settings_requireinvites && !isset($_POST["invitecode"])) {
-						$register_error = "You must have an invite code.";
-					} else {
+				// Check POST data
+				if ($_POST) {
+					if (input_checkRegistrationPost()) {
 
-						// Validate form
-						if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-							$register_error = "Email is invalid.";
-						} else if (getUID($_POST["username"])) {
-							$register_error = "Username is taken.";
-						} else if (strlen($_POST["password"]) < $settings_minpwlen) {
-							$register_error = "Password too short.";
-						} else if ($_POST["password"] != $_POST["v_password"]) {
-							$register_error = "Passwords do not match.";
+						// Ensure we are able to register and get message
+						$register_check = input_checkRegistration();
+						$register_error = $register_check[1];
+
+						if ($register_check[0]) {
+							// Do registration
+							input_doRegistration();
 						}
-					}
 
-					if ($register_error == "") {
-
-						// Insert registration info to db
-
-						
-
-
-						$register_error = "Registration complete.";
-
-					}
-
-					if ($register_error != "") {
-						?>
-						<tr>
-							<td colspan="2" class="tdcenter">
-								<?php echo $register_error; ?>
-							</td>
-						</tr>	
-						<?php
+						// Registration attempt response
+						if ($register_error != "") {
+							echo '
+							<tr>
+								<td colspan="2" class="tdcenter">
+									'.$register_error.'
+								</td>
+							</tr>';
+						}
+					} else {
+						echo "V";
 					}
 				}
 				?>

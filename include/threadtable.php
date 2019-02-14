@@ -41,10 +41,10 @@ foreach ($db->query("SELECT * FROM threads WHERE categoryid = ".$categoryid." AN
 	}
 
 	// Query rank if not cached
-	$rankcache[$user["rankid"]] = $rank = queryById("ranks", $rankcache, $user["rankid"]);
+	$rankcache[$user["rankid"]] = $rank = db_queryById("ranks", $rankcache, $user["rankid"]);
 
 	// Query group if not cached
-	$groupcache[$user["groupid"]] = $group = queryById("groups", $groupcache, $user["groupid"]);
+	$groupcache[$user["groupid"]] = $group = db_queryById("groups", $groupcache, $user["groupid"]);
 
 	?>
 		<tr>

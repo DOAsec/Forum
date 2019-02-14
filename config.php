@@ -15,6 +15,8 @@ $config_dbfailfile = "nodb.php";
 $settings_themename = "default";
 $settings_avatardir = "files/avatars/";
 $settings_defaultavatar = "defaulticon.png";
+$settings_defaultgroup = 1;
+$settings_defaultrank = 1;
 $settings_threadsperpage = 6;
 $settings_navurls = array("Back to Portfolio" => "../");
 $settings_minpwlen = 6;

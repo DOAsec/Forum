@@ -16,12 +16,12 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
 		
 		foreach ($db->query($catquery) as $category) {
 
-			$curcat = queryById("categories", array(), $category["id"]);
+			$curcat = db_queryById("categories", array(), $category["id"]);
 			$catstring = "";
 			if ($curcat["parent"] != 0) {
 				$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a>';
 				while ($curcat["parent"] != 0) {
-					$curcat = queryById("categories", array(), $curcat["parent"]);
+					$curcat = db_queryById("categories", array(), $curcat["parent"]);
 					$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a> > '.$catstring;
 				}
 			} else {
@@ -126,10 +126,10 @@ if ( basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"]) ) {
 									}
 
 									// Query user if not cached
-									$usercache[$lastpost["accountid"]] = $user = queryById("accounts", $usercache, $lastpost["accountid"]);
+									$usercache[$lastpost["accountid"]] = $user = db_queryById("accounts", $usercache, $lastpost["accountid"]);
 
 									// Query rank if not cached
-									$rankcache[$user["rankid"]] = $rank = queryById("ranks", $rankcache, $user["rankid"]);
+									$rankcache[$user["rankid"]] = $rank = db_queryById("ranks", $rankcache, $user["rankid"]);
 
 									echo '<a href="?user='.$user["id"].'" class="usera"><span style="color: '.htmlspecialchars($rank["color"]).';">'.htmlspecialchars($user["username"]).'</span></a> posted'.$in.' the thread "<a href="?thread='.$lastthread["safesubject"].'">'.$lastthread["subject"].'</a>" at '.date(DATE_RFC2822, $lastpost["timestamp"]);
 									

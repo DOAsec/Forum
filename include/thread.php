@@ -14,7 +14,7 @@ Page selection works, but there are no links and the code is not aware of the to
 
 
 // Query for the thread
-$thread = queryByX("threads", $threadcache, $_GET["thread"], "safesubject");
+$thread = db_queryByX("threads", $threadcache, $_GET["thread"], "safesubject");
 
 // Check to see if thread was found
 if ($thread) {
@@ -46,10 +46,10 @@ if ($thread) {
 	}
 
 	// Set up category navigation
-	$curcat = queryById("categories", array(), $thread["categoryid"]);
+	$curcat = db_queryById("categories", array(), $thread["categoryid"]);
 	$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'" class="cpage">'.htmlspecialchars($curcat["name"]).'</a>';
 	while ($curcat["parent"] != 0) {
-		$curcat = queryById("categories", array(), $curcat["parent"]);
+		$curcat = db_queryById("categories", array(), $curcat["parent"]);
 		$catstring = '<a href="?cat='.htmlspecialchars($curcat["safename"]).'">'.htmlspecialchars($curcat["name"]).'</a> '.$catstring;
 	}
 	$catstring = '<a href="?">Home</a> '.$catstring;
@@ -70,7 +70,7 @@ if ($thread) {
 	}
 
 	// Get page count for pagination
-	$pagecount = ceil((queryCount("posts", "threadid", $thread["id"]) + 1) / $settings_threadsperpage);
+	$pagecount = ceil((db_queryCount("posts", "threadid", $thread["id"]) + 1) / $settings_threadsperpage);
 
 	// Set up page navigation
 	$paginationstring = "";
@@ -136,13 +136,13 @@ if ($thread) {
 
 								
 								// Query user if not cached
-								$usercache[$post["accountid"]] = $user = queryById("accounts", $usercache, $post["accountid"]);
+								$usercache[$post["accountid"]] = $user = db_queryById("accounts", $usercache, $post["accountid"]);
 
 								// Query rank if not cached
-								$rankcache[$user["rankid"]] = $rank = queryById("ranks", $rankcache, $user["rankid"]);
+								$rankcache[$user["rankid"]] = $rank = db_queryById("ranks", $rankcache, $user["rankid"]);
 
 								// Query group if not cached
-								$groupcache[$user["groupid"]] = $group = queryById("groups", $groupcache, $user["groupid"]);
+								$groupcache[$user["groupid"]] = $group = db_queryById("groups", $groupcache, $user["groupid"]);
 								
 
 								include($config_defaultavatar."posttable.php");

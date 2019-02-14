@@ -10,6 +10,10 @@ include_once("config.php");
 include_once("dbfunctions.php");
 include_once("displayfunctions.php");
 
+if ($_POST) {
+	include_once("inputfunctions.php");
+}
+
 include_once("auth.php");
 
 include_once($config_defaultavatar."header.php");

@@ -1,14 +1,14 @@
 <div class="forumsection">
 	<?php
-	$userdata = queryById("accounts", $usercache, $_GET["user"]);
+	$userdata = db_queryById("accounts", $usercache, $_GET["user"]);
 
 	if ($userdata != false) {
 
 		// Query rank if not cached
-		$rankcache[$userdata["rankid"]] = $rank = queryById("ranks", $rankcache, $userdata["rankid"]);
+		$rankcache[$userdata["rankid"]] = $rank = db_queryById("ranks", $rankcache, $userdata["rankid"]);
 
 		// Query group if not cached
-		$groupcache[$userdata["groupid"]] = $group = queryById("groups", $groupcache, $userdata["groupid"]);
+		$groupcache[$userdata["groupid"]] = $group = db_queryById("groups", $groupcache, $userdata["groupid"]);
 
 		?>
 		<div class="usergrid">
@@ -135,7 +135,7 @@
 							</td>
 							<td>
 								<?php
-								$refered = queryAllByX("accounts", $userdata["id"], "refid");
+								$refered = db_queryAllByX("accounts", $userdata["id"], "refid");
 								echo sizeof($refered);
 								?>
 							</td>
@@ -145,10 +145,10 @@
 							$user = $refd;
 
 							// Query rank if not cached
-							$rankcache[$user["rankid"]] = $rank = queryById("ranks", $rankcache, $user["rankid"]);
+							$rankcache[$user["rankid"]] = $rank = db_queryById("ranks", $rankcache, $user["rankid"]);
 
 							// Query group if not cached
-							$groupcache[$user["groupid"]] = $group = queryById("groups", $groupcache, $user["groupid"]);
+							$groupcache[$user["groupid"]] = $group = db_queryById("groups", $groupcache, $user["groupid"]);
 							?>
 							<tr>
 								<td>
