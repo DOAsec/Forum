@@ -75,122 +75,132 @@ if ($thread) {
 	// Set up page navigation
 	$paginationstring = "";
 	if ($page > 1) {
-		$paginationstring .= " ".threadLink($thread, "<< ", 1, $page);
+		$paginationstring .= " ".display_threadLink($thread, "<< ", 1, $page);
 	}
 	if ($page > 2) {
-		$paginationstring .= " ".threadLink($thread, "< ", $page - 1, $page);
+		$paginationstring .= " ".display_threadLink($thread, "< ", $page - 1, $page);
 	}
 	for ($pagei = 1; $pagei < ($pagecount + 1); $pagei++) {
-		$paginationstring .= threadLink($thread, $pagei, $pagei, $page);
+		$paginationstring .= display_threadLink($thread, $pagei, $pagei, $page);
 	}
 	if ($page < $pagecount - 1) {
-		$paginationstring .= " ".threadLink($thread, ">", $page + 1, $page);
+		$paginationstring .= " ".display_threadLink($thread, ">", $page + 1, $page);
 	}
 	if ($page < $pagecount) {
-		$paginationstring .= " ".threadLink($thread, ">>", $pagecount, $page);
+		$paginationstring .= " ".display_threadLink($thread, ">>", $pagecount, $page);
 	}
 	?>
-	<div class="catnav">
-		<?php
-			echo '
-			<div>'.$catstring.'</div>
-			<div>'.$paginationstring.'</div>';
-		?>
-	</div>
-
-	<div class="forumsection">
-		<table>
-			<thead class="fhead">
-				<tr>
-					<td colspan="2" class="tdcenter">
-						<?php echo htmlspecialchars($thread["subject"]); ?>
-					</td>
-				</tr>
-				<tr>
-					<td class="fdesc tdcenter" style="width: 15%;">
-						Author
-					</td>
-					<td class="fdesc">
-						Message
-					</td>
-				</tr>
-			</thead>
-			<tbody>
+			
+			<div class="catnav">
 				<?php
-
-					if ($page == 1) {
-						$firstpost = true;
-						include($config_defaultavatar."posttable.php");
-					}
-
-					$firstpost = false;
-
-					foreach ($db->query("SELECT * FROM posts WHERE threadid = ".$thread["id"]." ORDER BY id ASC LIMIT ".$settings_threadsperpage." OFFSET ".$offset.";") as $post) {
-						$postnum++;
-
-
-						
-						// Query user if not cached
-						$usercache[$post["accountid"]] = $user = queryById("accounts", $usercache, $post["accountid"]);
-
-						// Query rank if not cached
-						$rankcache[$user["rankid"]] = $rank = queryById("ranks", $rankcache, $user["rankid"]);
-
-						// Query group if not cached
-						$groupcache[$user["groupid"]] = $group = queryById("groups", $groupcache, $user["groupid"]);
-						
-
-						include($config_defaultavatar."posttable.php");
-					}
+					echo '
+					<div>
+						'.$catstring.'
+					</div>
+					<div>
+						'.$paginationstring.'
+					</div>';
 				?>
-			</tbody>
-		</table>
-	</div>
 
-	<div class="catnav">
-		<?php
-			echo '
-			<div>'.$paginationstring.'</div>
-			<div>'.$catstring.'</div>';
-		?>
-	</div>
+			</div>
 
-	<div class="forumsection">
-		<form method="POST">
-			<table class="createpost">
-				<thead class="fhead">
-					<tr>
-						<td colspan="2">
-							New Post
-						</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							Subject:
-						</td>
-						<td>
-							<input type="text" name="post_subject" placeholder="Post Subject" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Body:
-						</td>
-						<td>
-							<textarea name="post_content"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<input type="submit" value="New Post" />
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
-	</div>
+			<div class="forumsection">
+				<table>
+					<thead class="fhead">
+						<tr>
+							<td colspan="2" class="tdcenter">
+								<?php echo htmlspecialchars($thread["subject"]); ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="fdesc tdcenter" style="width: 15%;">
+								Author
+							</td>
+							<td class="fdesc">
+								Message
+							</td>
+						</tr>
+					</thead>
+					<tbody><?php
+
+							if ($page == 1) {
+								$firstpost = true;
+								include($config_defaultavatar."posttable.php");
+							}
+
+							$firstpost = false;
+
+							foreach ($db->query("SELECT * FROM posts WHERE threadid = ".$thread["id"]." ORDER BY id ASC LIMIT ".$settings_threadsperpage." OFFSET ".$offset.";") as $post) {
+								$postnum++;
+
+
+								
+								// Query user if not cached
+								$usercache[$post["accountid"]] = $user = queryById("accounts", $usercache, $post["accountid"]);
+
+								// Query rank if not cached
+								$rankcache[$user["rankid"]] = $rank = queryById("ranks", $rankcache, $user["rankid"]);
+
+								// Query group if not cached
+								$groupcache[$user["groupid"]] = $group = queryById("groups", $groupcache, $user["groupid"]);
+								
+
+								include($config_defaultavatar."posttable.php");
+							}
+						?>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="catnav">
+				<?php
+				echo '
+				<div>
+					'.$paginationstring.'
+				</div>
+				<div>
+					'.$catstring.'
+				</div>';
+				?>
+
+			</div>
+
+			<div class="forumsection">
+				<form method="POST">
+					<table class="createpost">
+						<thead class="fhead">
+							<tr>
+								<td colspan="2">
+									New Post
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									Subject:
+								</td>
+								<td>
+									<input type="text" name="post_subject" placeholder="Post Subject" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Body:
+								</td>
+								<td>
+									<textarea name="post_content"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="submit" value="New Post" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
 
 
 

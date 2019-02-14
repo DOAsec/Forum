@@ -1,5 +1,5 @@
 <?php
-function avatar_sm($user) {
+function display_avatar_sm($user) {
 	global $settings_avatardir;
 	global $settings_defaultavatar;
 
@@ -10,7 +10,7 @@ function avatar_sm($user) {
 	}
 }
 
-function avatar($user) {
+function display_avatar($user) {
 	global $settings_avatardir;
 	global $settings_defaultavatar;
 
@@ -21,7 +21,7 @@ function avatar($user) {
 	}
 }
 
-function calcPostPage($postnum) {
+function display_calcPostPage($postnum) {
 	global $settings_threadsperpage;
 
 	if ($postnum < $settings_threadsperpage) {
@@ -31,7 +31,7 @@ function calcPostPage($postnum) {
 	}
 }
 
-function latestPosts($id = 0, $limit = 10) {
+function display_latestPosts($id = 0, $limit = 10) {
 	global $user_loggedin;
 	global $settings_requireinvites;
 	?>
@@ -56,17 +56,17 @@ function latestPosts($id = 0, $limit = 10) {
 		<?php
 	} else {
 		if ($id == 0) {
-			$posts = queryLatestOrderByXWhere("posts", "id", "approved", 1, $limit);
+			$posts = db_queryLatestOrderByXWhere("posts", "id", "approved", 1, $limit);
 		} else {
-			$posts = queryLatestOrderByXWhere("posts", "id", "accountid", $id, $limit);
+			$posts = db_queryLatestOrderByXWhere("posts", "id", "accountid", $id, $limit);
 		}
 
 		$catcache = array();
 		$threadcache = array();
 
 		foreach ($posts as $post) {
-			$thread = queryById("threads", $threadcache, $post["threadid"]);
-			$postpage = calcPostPage(queryCountLt("posts", "threadid", $post["threadid"], "id", $post["id"]) + 1);
+			$thread = db_queryById("threads", $threadcache, $post["threadid"]);
+			$postpage = display_calcPostPage(db_queryCountLt("posts", "threadid", $post["threadid"], "id", $post["id"]) + 1);
 
 			?>
 			<tr>
@@ -89,7 +89,7 @@ function latestPosts($id = 0, $limit = 10) {
 }
 
 
-function lastestThreads($id = 0, $limit = 10) {
+function display_lastestThreads($id = 0, $limit = 10) {
 	global $user_loggedin;
 	global $settings_requireinvites;
 	?>
@@ -120,9 +120,9 @@ function lastestThreads($id = 0, $limit = 10) {
 		<?php
 	} else {
 		if ($id == 0) {
-			$threads = queryLatestOrderByXWhere("threads", "timestamp", "approved", 1, 5);
+			$threads = db_queryLatestOrderByXWhere("threads", "timestamp", "approved", 1, 5);
 		} else {
-			$threads = queryLatestOrderByXWhere("threads", "timestamp", "accountid", $id, 10);
+			$threads = db_queryLatestOrderByXWhere("threads", "timestamp", "accountid", $id, 10);
 		}
 
 		$catcache = array();
@@ -132,7 +132,7 @@ function lastestThreads($id = 0, $limit = 10) {
 			<tr>
 				<td>
 					<?php
-					$category = queryById("categories", $catcache, $thread["categoryid"]);
+					$category = db_queryById("categories", $catcache, $thread["categoryid"]);
 					echo '<a href="?cat='.htmlspecialchars($category["safename"]).'">'.htmlspecialchars($category["name"]).'</a>';
 					?>
 				</td>
@@ -157,7 +157,7 @@ function lastestThreads($id = 0, $limit = 10) {
 	<?php
 }
 
-function threadLink($thread, $text = "", $page = 1, $cpage = false) {
+function display_threadLink($thread, $text = "", $page = 1, $cpage = false) {
 	if ($text == "") {
 		$text = $thread["subject"];
 	}

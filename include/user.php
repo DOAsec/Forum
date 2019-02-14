@@ -15,7 +15,7 @@
 			<div class="usercolumn profile">
 				<h4><b>About</b></h4>
 				<div class="infobox">
-					<div style="text-align: center"><?php echo avatar($userdata); ?></div>
+					<div style="text-align: center"><?php echo display_avatar($userdata); ?></div>
 					<table>
 						<tr>
 							<td>
@@ -202,7 +202,7 @@
 				<h4>Threads</h4>
 				<div class="infobox">
 					
-					<?php echo lastestThreads($userdata["id"], 15); ?>
+					<?php echo display_lastestThreads($userdata["id"], 15); ?>
 
 				</div>
 			</div>
@@ -210,7 +210,7 @@
 				<h4>Posts</h4>
 				<div class="infobox">
 						
-					<?php echo latestPosts($userdata["id"], 25); ?>
+					<?php echo display_latestPosts($userdata["id"], 25); ?>
 
 				</div>
 			</div>

@@ -35,7 +35,7 @@ if (!$user_loggedin) {
 				?>
 			</div>
 			<?php
-			echo avatar_sm($user);
+			echo display_avatar_sm($user);
 		}
 		?>
 	</div>
