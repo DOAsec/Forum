@@ -55,6 +55,9 @@ if ($thread) {
 	$catstring = '<a href="?">Home</a> '.$catstring;
 
 
+	// Get page count
+	$pagecount = ceil((db_queryCount("posts", "threadid", $thread["id"]) + 1) / $settings_threadsperpage);
+
 	// Set up current page info
 	$page = 1;
 	$offset = 0;
@@ -62,15 +65,17 @@ if ($thread) {
 	if (isset($_GET["page"])) {
 		if (is_numeric($_GET["page"]) && $_GET["page"] > 0) {
 			$page = $_GET["page"];
+
+			if ($page > $pagecount) {
+				$page = $pagecount;
+			}
+
 			$offset = (($page - 1) * $settings_threadsperpage);
 			
 		} else {
 			die($numbersonlyerror);
 		}
 	}
-
-	// Get page count for pagination
-	$pagecount = ceil((db_queryCount("posts", "threadid", $thread["id"]) + 1) / $settings_threadsperpage);
 
 	// Set up page navigation
 	$paginationstring = "";
@@ -88,6 +93,28 @@ if ($thread) {
 	}
 	if ($page < $pagecount) {
 		$paginationstring .= " ".display_threadLink($thread, ">>", $pagecount, $page);
+	}
+
+
+	// Check for post submission.
+	$post_error = "";
+	$post_lastid = 0;
+
+	// Check POST data
+	if ($_POST) {
+		if (input_checkNewPostPost()) {
+
+			// Ensure we are able to register and get message
+			$post_check = input_checkNewPost();
+			$post_error = $post_check[1];
+
+			if ($post_check[0]) {
+				// Do registration
+				$post_lastid = input_doNewPost();
+			}
+
+			
+		}
 	}
 	?>
 			
@@ -166,7 +193,7 @@ if ($thread) {
 			</div>
 
 			<div class="forumsection">
-				<form method="POST">
+				<form method="POST" action="?thread=<?php echo $thread["safesubject"].'&page='.($pagecount + 1); ?>#lastpost">
 					<table class="createpost">
 						<thead class="fhead">
 							<tr>
@@ -176,14 +203,6 @@ if ($thread) {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									Subject:
-								</td>
-								<td>
-									<input type="text" name="post_subject" placeholder="Post Subject" />
-								</td>
-							</tr>
 							<tr>
 								<td>
 									Body:
@@ -197,6 +216,17 @@ if ($thread) {
 									<input type="submit" value="New Post" />
 								</td>
 							</tr>
+							<?php
+							// Registration attempt response
+							if ($post_error != "") {
+								echo '
+								<tr>
+									<td colspan="2" class="tdcenter">
+										'.$post_error.'
+									</td>
+								</tr>';
+							}
+							?>
 						</tbody>
 					</table>
 				</form>

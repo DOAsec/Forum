@@ -12,6 +12,7 @@ $REMOTE_ADDR = $_SERVER["REMOTE_ADDR"];
 $config_defaultavatar = "include/";
 $config_dbfailfile = "nodb.php";
 
+$settings_autoapprove = 1;
 $settings_themename = "default";
 $settings_avatardir = "files/avatars/";
 $settings_defaultavatar = "defaulticon.png";

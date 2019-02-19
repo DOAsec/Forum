@@ -4,8 +4,13 @@
 					echo '
 				<tr id="'.htmlspecialchars($thread["safesubject"]).'">';
 				} else {
-					echo '
+					if ($post_lastid == $post["id"]) {
+						echo '
+				<tr id="lastpost">';
+					} else {
+						echo '
 				<tr id="'.htmlspecialchars($thread["safesubject"]).$post["id"].'">';
+					}
 				}
 				?>
 

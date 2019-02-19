@@ -91,4 +91,15 @@ VALUES ('0', ?, ?, ?, ?, ?, ?, 0, 0, ?, now(), ?);";
 	$q = $db->prepare($qs);
 	$q->execute(array($email, $username, $passwordhash, $avatar, $rankid, $groupid, $ip, $invitecodes));
 }
+
+function db_newPost($approved, $userid, $threadid, $body) {
+	global $db;
+
+	$qs = "INSERT INTO `posts` (`approved`, `accountid`, `threadid`, `body`, `timestamp`, `edittimestamp`, `editaccountid`)
+VALUES (?, ?, ?, ?, now(), 0, ?);";
+	$q = $db->prepare($qs);
+	$q->execute(array($approved, $userid, $threadid, $body, $userid));
+
+	return $db->lastInsertId();
+}
 ?>

@@ -51,7 +51,6 @@ function input_checkRegistration() {
 	return array($register_bool, $register_response);
 }
 
-
 function input_doRegistration() {
 	global $_POST;
 	global $REMOTE_ADDR;
@@ -62,6 +61,47 @@ function input_doRegistration() {
 	$passwordhash = password_hash($_POST["password"], PASSWORD_BCRYPT);
 
 	db_registerUser($_POST["email"], $_POST["username"], $passwordhash, "", $settings_defaultrank, $settings_defaultgroup, $REMOTE_ADDR, $settings_invitecodes);
+}
+
+
+
+function input_checkNewPostPost() {
+	global $_POST;
+	if (isset($_POST["post_content"])) {
+		return true;
+	}
+	return false;
+}
+
+function input_checkNewPost() {
+	global $_POST;
+	global $settings_autoapprove;
+	global $user;
+	global $thread;
+
+	$post_response = "";
+	$post_bool = false;
+
+	if (!isset($thread["id"]) && !isset($user["id"])) {
+		$post_response = "You do not have permissions to post.";
+	} else if ($settings_autoapprove < 1) {
+		$post_response = "Your post will be displayed after it is approved.";
+		$post_bool = true;
+	} else {
+		$post_response = "Your post has been accepted.";
+		$post_bool = true;
+	}
+
+	return array($post_bool, $post_response);
+}
+
+function input_doNewPost() {
+	global $_POST;
+	global $settings_autoapprove;
+	global $user;
+	global $thread;
+
+	return db_newPost($settings_autoapprove, $user["id"], $thread["id"], $_POST["post_content"]);
 }
 
 
