@@ -87,18 +87,18 @@ function db_registerUser($email, $username, $passwordhash, $avatar, $rankid, $gr
 	global $db;
 
 	$qs = "INSERT INTO `accounts` (`refid`, `email`, `username`, `password`, `avatar`, `rankid`, `groupid`, `isbanned`, `postcount`, `regip`, `regtime`, `invitecodes`)
-VALUES ('0', ?, ?, ?, ?, ?, ?, 0, 0, ?, now(), ?);";
+VALUES ('0', ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?);";
 	$q = $db->prepare($qs);
-	$q->execute(array($email, $username, $passwordhash, $avatar, $rankid, $groupid, $ip, $invitecodes));
+	$q->execute(array($email, $username, $passwordhash, $avatar, $rankid, $groupid, $ip, time() $invitecodes));
 }
 
 function db_newPost($approved, $userid, $threadid, $body) {
 	global $db;
 
 	$qs = "INSERT INTO `posts` (`approved`, `accountid`, `threadid`, `body`, `timestamp`, `edittimestamp`, `editaccountid`)
-VALUES (?, ?, ?, ?, now(), 0, ?);";
+VALUES (?, ?, ?, ?, ?, 0, ?);";
 	$q = $db->prepare($qs);
-	$q->execute(array($approved, $userid, $threadid, $body, $userid));
+	$q->execute(array($approved, $userid, $threadid, $body, time(), $userid));
 
 	return $db->lastInsertId();
 }
